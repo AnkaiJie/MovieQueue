@@ -2,18 +2,15 @@ var path = require('path');
 var express = require('express');
 
 module.exports = function(app, passport) {
-	var router = express.Router();
-	app.use('/', router);
-	app.use(express.static(path.resolve("./")));
 
 	app.get('/', function(req, res) {
-		res.sendFile('./index.html');
+		res.render('index.ejs');
 	});
 
 	app.get('/homePage', isLoggedIn, function(req, res) {
-		res.status(200).send(req.user);
+		console.log('in success function');
+		res.render('homePage.ejs');
 	});
-	
 
 	app.get('/auth/facebook', passport.authenticate('facebook', {
 		scope : 'email'
@@ -30,7 +27,7 @@ module.exports = function(app, passport) {
 	});
 
 	function isLoggedIn(req, res, next) {
-
+		console.log('in isLoggedIn function');
 		// if user is authenticated in the session, carry on
 		if (req.isAuthenticated())
 			return next();

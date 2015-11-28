@@ -6,8 +6,8 @@ var bodyParser = require('body-parser');
 var database = require('./models/database.js');
 var passport = require('passport');
 var session = require('express-session');
-var cookieParser = require ('cookie-parser');
-var morgan = require ('morgan');
+var cookieParser = require('cookie-parser');
+var morgan = require('morgan');
 var flash = require('connect-flash');
 var path = require('path');
 // get passport.js file configuration
@@ -29,13 +29,14 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+app.set('view engine', 'ejs');
 
 // DB Models
 var User = require('./models/user.js');
 var Movie = require('./models/movie.js');
 
 // Setting up router
-require ('./routes.js')(app, passport);
+require('./routes.js')(app, passport);
 
 // Port Listen
 app.listen(port);

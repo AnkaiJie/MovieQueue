@@ -21,9 +21,7 @@ module.exports = function(passport) {
 		clientID : config.fbAuth.clientID,
 		clientSecret : config.fbAuth.clientSecret,
 		callbackURL : config.fbAuth.callbackURL
-	},
-
-	function(token, refreshToken, profile, done) {
+	}, function(token, refreshToken, profile, done) {
 		// asynchronous
 		process.nextTick(function() {
 
@@ -45,9 +43,11 @@ module.exports = function(passport) {
 					// them
 					var newUser = new User();
 					newUser.facebook.id = profile.id;
-					newUser.facebook.token = token; 
-					newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName; 
-					newUser.facebook.email = profile.emails[0].value; 
+					newUser.facebook.token = token;
+					newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
+					if (newUser.facebook.email != null) {
+						newUser.facebook.email = profile.emails[0].value;
+					}
 
 					// save our user to the database
 					newUser.save(function(err) {
@@ -64,6 +64,3 @@ module.exports = function(passport) {
 	}));
 
 };
-
-
-
