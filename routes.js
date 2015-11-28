@@ -5,10 +5,12 @@ var facebook = require('./app/fbFriends.js');
 module.exports = function(app, passport, User) {
 
 	app.get('/', function(req, res) {
+		res.render('home.ejs');
 		res.render('index.ejs');
 	});
+<<<<<<< HEAD
 
-	app.get('/homePage', isLoggedIn, function(req, res) {
+	app.get('/home', isLoggedIn, function(req, res) {
 		User.findOne({
 			'facebook.name' : req.user.facebook.name
 		}, function(err, user) {
@@ -29,17 +31,20 @@ module.exports = function(app, passport, User) {
 				// console.log("not logged in");
 				res.render('index.ejs');
 			}
-		});
-	});
+
 
 	app.get('/auth/facebook', passport.authenticate('facebook', {
-		scope : 'user_friends'
+		scope : 'email'
 	}));
 
 	app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-		successRedirect : '/homePage',
+		successRedirect : '/home',
 		failureRedirect : '/'
 	}));
+
+	/*router.get('/search', function(req, res) {
+		res.render('');
+	});*/
 
 	app.get('/logout', function(req, res) {
 		req.logout();
