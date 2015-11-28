@@ -4,13 +4,12 @@ var express = require('express');
 module.exports = function(app, passport) {
 
 	app.get('/', function(req, res) {
-		res.render('views/home.ejs');
+		res.render('index.ejs');
 	});
 
 	app.get('/homePage', isLoggedIn, function(req, res) {
-
-		console.log('in success function');
-		res.render('homePage.ejs');
+		console.log(req.user.facebook.name);
+		res.render('home.ejs');
 	});
 
 	app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'user_friends'}));
