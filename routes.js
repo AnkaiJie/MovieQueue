@@ -5,10 +5,8 @@ var facebook = require('./app/fbFriends.js');
 module.exports = function(app, passport, User) {
 
 	app.get('/', function(req, res) {
-		res.render('home.ejs');
 		res.render('index.ejs');
 	});
-<<<<<<< HEAD
 
 	app.get('/home', isLoggedIn, function(req, res) {
 		User.findOne({
@@ -26,15 +24,15 @@ module.exports = function(app, passport, User) {
 						name : name
 					});
 				});
-
 			} else {
 				// console.log("not logged in");
 				res.render('index.ejs');
 			}
-
+		});
+	});
 
 	app.get('/auth/facebook', passport.authenticate('facebook', {
-		scope : 'email'
+		scope : 'user_friends'
 	}));
 
 	app.get('/auth/facebook/callback', passport.authenticate('facebook', {
@@ -42,9 +40,9 @@ module.exports = function(app, passport, User) {
 		failureRedirect : '/'
 	}));
 
-	/*router.get('/search', function(req, res) {
-		res.render('');
-	});*/
+	/*
+	 * router.get('/search', function(req, res) { res.render(''); });
+	 */
 
 	app.get('/logout', function(req, res) {
 		req.logout();
