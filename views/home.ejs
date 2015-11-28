@@ -16,12 +16,12 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body style="background-image :url('img/home-background.jpg');
+  <body style="background-image :url('./img/home-background.jpg');
                background-repeat: no-repeat;
                background-position: 50% 0%">
       <div>
-          <img class="center-blurb" src='img/logo.png'>
-          <h1 class="homeblurb">Keep track of all those movies you've been meaning to watch</h1>
+          <img class="center-blurb" src='logo.png'>
+          <h1 class="homeblurb" id="name">Welcome, <%= name %></h1>
       </div>
       
       <div class="fb-login-button" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false">

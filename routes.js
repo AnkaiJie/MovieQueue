@@ -8,11 +8,15 @@ module.exports = function(app, passport) {
 	});
 
 	app.get('/homePage', isLoggedIn, function(req, res) {
-		console.log(req.user.facebook.name);
-		res.render('home.ejs');
+		var name = req.user.facebook.name;
+		res.render('home.ejs', {
+			name : name
+		});
 	});
 
-	app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'user_friends'}));
+	app.get('/auth/facebook', passport.authenticate('facebook', {
+		scope : 'user_friends'
+	}));
 
 	app.get('/auth/facebook/callback', passport.authenticate('facebook', {
 		successRedirect : '/homePage',
