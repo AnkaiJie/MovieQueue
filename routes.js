@@ -7,10 +7,12 @@ module.exports = function(app, passport) {
 		res.render('home.ejs');
 		res.render('index.ejs');
 	});
-
-	app.get('/homePage', isLoggedIn, function(req, res) {
-		console.log('in success function');
-		res.render('homePage.ejs');
+	
+	app.get('/home', isLoggedIn, function(req, res) {
+		var name = req.user.facebook.name;
+		res.render('home.ejs', {
+			name : name
+		});
 	});
 
 	app.get('/auth/facebook', passport.authenticate('facebook', {
@@ -18,7 +20,7 @@ module.exports = function(app, passport) {
 	}));
 
 	app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-		successRedirect : '/homePage',
+		successRedirect : '/home',
 		failureRedirect : '/'
 	}));
 
