@@ -1,16 +1,34 @@
 var path = require('path');
 var express = require('express');
+var facebook = require('./app/fbFriends.js');
 
-module.exports = function(app, passport) {
+module.exports = function(app, passport, User) {
 
 	app.get('/', function(req, res) {
 		res.render('index.ejs');
 	});
 
 	app.get('/homePage', isLoggedIn, function(req, res) {
-		var name = req.user.facebook.name;
-		res.render('home.ejs', {
-			name : name
+		User.findOne({
+			'facebook.name' : req.user.facebook.name
+		}, function(err, user) {
+			if (err) {
+				throw err
+			} else if (user != null) {
+				facebook.getFbData(user.facebook.token, '/me/friends', function(data) {
+					user.facebook.friends = JSON.parse(data);
+					console.log(user.facebook.friends.data);
+					user.save();
+					var name = user.facebook.name;
+					res.render('home.ejs', {
+						name : name
+					});
+				});
+
+			} else {
+				// console.log("not logged in");
+				res.render('index.ejs');
+			}
 		});
 	});
 

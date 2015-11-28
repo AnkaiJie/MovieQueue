@@ -36,7 +36,7 @@ var User = require('./models/user.js');
 var Movie = require('./models/movie.js');
 
 // Setting up router
-require('./routes.js')(app, passport);
+require('./routes.js')(app, passport, User);
 
 // Port Listen
 app.listen(port);
