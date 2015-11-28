@@ -4,16 +4,22 @@ var express = require('express');
 module.exports = function(app, passport) {
 
 	app.get('/', function(req, res) {
+<<<<<<< HEAD
 		res.render('home.ejs');
+=======
+		res.render('index.ejs');
+>>>>>>> 0e871799b09df37a43e26ba9ef4bc0ad00f8e578
 	});
 
 	app.get('/homePage', isLoggedIn, function(req, res) {
-		console.log('in success function');
-		res.render('homePage.ejs');
+		var name = req.user.facebook.name;
+		res.render('home.ejs', {
+			name : name
+		});
 	});
 
 	app.get('/auth/facebook', passport.authenticate('facebook', {
-		scope : 'email'
+		scope : 'user_friends'
 	}));
 
 	app.get('/auth/facebook/callback', passport.authenticate('facebook', {
