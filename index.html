@@ -1,35 +1,41 @@
-<!DOCTYPE hmtl> 
+<!DOCTYPE hmtl>
 <html lang="en-US">
-<script src="http://ajax.goolgleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js">
+<script
+	src="http://ajax.goolgleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js">
+	
 </script>
 <body>
-<script>
-window.fbAsyncInit = function() {
-FB.init({
-  appId      : 'your-app-id',
-  xfbml      : true,
-  version    : 'v2.5'
-});
-FB.getLoginStatus(function(response) {
-  if (response.status === 'connected') {
-    console.log('Logged in.');
-  }
-  else {
-    FB.login();
-  }
-});
-};
 
-(function(d, s, id){
- var js, fjs = d.getElementsByTagName(s)[0];
- if (d.getElementById(id)) {return;}
- js = d.createElement(s); js.id = id;
- js.src = "//connect.facebook.net/en_US/sdk.js";
- fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-</script>
-<p> Made it </p>
+	<script>
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId : 'your-app-id',
+				xfbml : true,
+				version : 'v2.5'
+			});
+			FB.getLoginStatus(function(response) {
+				if (response.status === 'connected') {
+					console.log('Logged in.');
+				} else {
+					FB.login();
+				}
+			});
+		};
+
+		(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) {
+				return;
+			}
+			js = d.createElement(s);
+			js.id = id;
+			js.src = "//connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<p>Made it</p>
 
 </body>
 
-</html> 
+</html>

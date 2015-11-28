@@ -1,8 +1,14 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var userSchema = new Schema ({
-	name: String,
+var userSchema = mongoose.Schema({
+    facebook         : {
+        id           : String,
+        token        : String,
+        email        : String,
+        name         : String
+    },
+    movies: []
 });
 
 var user = mongoose.model('User', userSchema);
