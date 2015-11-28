@@ -4,6 +4,7 @@ var express = require('express');
 module.exports = function(app, passport) {
 
 	app.get('/', function(req, res) {
+		res.render('home.ejs');
 		res.render('index.ejs');
 	});
 
