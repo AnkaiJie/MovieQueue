@@ -7,12 +7,12 @@
   "license"		 : "ISC",
   "repository": {
 	  "type": "git",
-	  "url": "https://github.com/AnkaiJie/tracking-app.git"
+	  "url": "https://github.com/AnkaiJie/western-hackathon.git"
 	},
   "dependencies" : {
     "express"         : "~4.13.3",
     "express-session" : "^1.10.1",
     "mongoose"        : "~4.1.9",
-    "body-parser"     : "~1.4.3",
+    "body-parser"     : "~1.4.3"
   }
 }
