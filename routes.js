@@ -8,20 +8,22 @@ module.exports = function(app, passport) {
 	});
 
 	app.get('/homePage', isLoggedIn, function(req, res) {
-		var name = req.user.facebook.name;
-		res.render('home.ejs', {
-			name : name
-		});
+		console.log('in success function');
+		res.render('homePage.ejs');
 	});
 
 	app.get('/auth/facebook', passport.authenticate('facebook', {
-		scope : 'user_friends'
+		scope : 'email'
 	}));
 
 	app.get('/auth/facebook/callback', passport.authenticate('facebook', {
 		successRedirect : '/homePage',
 		failureRedirect : '/'
 	}));
+
+	/*router.get('/search', function(req, res) {
+		res.render('');
+	});*/
 
 	app.get('/logout', function(req, res) {
 		req.logout();
