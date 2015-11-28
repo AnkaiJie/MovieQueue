@@ -37,7 +37,6 @@ var Movie = require('./models/movie.js');
 // Setting up router
 require ('./routes.js')(app, passport);
 
-
 // Port Listen
 app.listen(port);
 console.log("We are rocking port: " + port);
