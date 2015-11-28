@@ -41,3 +41,9 @@ require('./routes.js')(app, passport);
 // Port Listen
 app.listen(port);
 console.log("We are rocking port: " + port);
+
+User.remove({}, function(err) {
+	if (err)
+		throw err;
+	console.log("All Users Deleted");
+});

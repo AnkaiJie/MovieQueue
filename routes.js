@@ -8,13 +8,12 @@ module.exports = function(app, passport) {
 	});
 
 	app.get('/homePage', isLoggedIn, function(req, res) {
+
 		console.log('in success function');
 		res.render('homePage.ejs');
 	});
 
-	app.get('/auth/facebook', passport.authenticate('facebook', {
-		scope : 'email'
-	}));
+	app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'user_friends'}));
 
 	app.get('/auth/facebook/callback', passport.authenticate('facebook', {
 		successRedirect : '/homePage',
