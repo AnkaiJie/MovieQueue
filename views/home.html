@@ -5,12 +5,12 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>Home | MovieQueue</title><link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+        <title>Home | MovieQueue</title>
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/custom.css">
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.10/css/dataTables.bootstrap.min.css">
     </head>
     <header>
         <nav class="navbar navbar-inverse navbar-static-top">
@@ -38,42 +38,39 @@
             </div>
         </nav>
     </header>
+    
     <body>
-        <table id="movie-showcase" class="table table-striped table-boredered"
-               cellspacing="0" width="100%">
-            <tbody id="tbody"></tbody>
-        </table>
-        <script>
-            var obj = [{
-                "key": "apple",
-                "value": 1.90
-            }, {
-                "key": "berry",
-                "value": 1.7
-            }, {
-                "key": "banana",
-                "value": 1.5
-            }, {
-                "key": "cherry",
-                "value": 1.2
-            }];
-            var globalCounter = 0;
-            var tbody = document.getElementById('tbody');
-            for (var i = 0; i < Object.keys(obj).length; i++) {
-                var th = "<th>";
-                var tr = "<tr>";
-                
-                if (obj[i].value.toString().substring(obj[i].value.toString().indexOf('.'), obj[i].value.toString().length) < 2) obj[i].value += "0";
-                tr += "<td>" + obj[i].key + "</td>" + "<td>$" + obj[i].value.toString() + "</td></tr>";
-                tbody.innerHTML += tr;
-            }
-        </script>
-        <script>
-            $(document).ready(function() {
-                $('#movie-showcase').DataTable();
-            } );
-        </script>
+        <div id="username" style="visibility: hidden;"><%=name%></div>
+        <div class="container" id="movie-feed">
+        </div>
     </body>
+    
+    <script>
+        var obj = [{
+            "id": 13,
+            "title": "Forrest Gump",
+            "date": "1994-06-22",
+            "rating": 7.9,
+            "desc": "First Movie"
+        }, {
+            "id": 133123,
+            "title": "Ip Man",
+            "date": "1999-06-25",
+            "rating": 9.9,
+            "desc": "Second Movie"
+        }];
+        
+        $(document).ready(function(){
+            initPane();
+        });
+        
+        var initPane = function() {
+            $("#movie-feed").after("<h1 id='movie-label' style='text-align: center;'>Your Movie List</h1>");
+            for (var i=0; i<obj.length; i++){
+                $("#movie-label").after("<div class='jumbotron' style='margin-left: 375px; margin-right:350px;' id='" + obj[i].id + "'><div class='col-md-3'> <h2>" + obj[i].title + "</h2>	<h3 style='font-size: 18px'>Released: " + obj[i].date + "</h3><h3 style='font-size: 18px'> Rating: " + obj[i].rating + "</h3> </div><div class='col-md-6'><h3 style='text-align: left; font-size: 18px'>" + obj[i].desc + "</h3> </div> <div class='container'><button type='button' class='btn btn-danger' style='float: right;'>Remove Movie</button><\div>");
+            }
+        }
+    </script>
     
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -83,6 +80,4 @@
     <script src="./js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.10/js/dataTables.bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="./js/ie10-viewport-bug-workaround.js"></script>
 </html>
