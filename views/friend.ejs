@@ -15,7 +15,10 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 
-<header>
+<header> </header>
+
+<body>
+<body>
 	<nav class="navbar navbar-inverse navbar-static-top">
 		<div class="container">
 			<div class="navbar-header" style="padding-top: 5px">
@@ -24,12 +27,13 @@
 				</a>
 			</div>
 			<div class="col-sm-3 col-md-7">
-				<form class="navbar" role="search" style="padding-top: 15px">
+				<form class="navbar" action="/search" method="post"
+					style="padding-top: 15px">
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search"
-							name="srch-term" id="srch-term">
+						<input type="text" class="form-control"
+							placeholder="Search For a Friend" name="name">
 						<div class="input-group-btn">
-							<button class="btn btn-default" type="submit">
+							<button class="btn btn-default" onclick="submit">
 								<i class="glyphicon glyphicon-search"></i>
 							</button>
 						</div>
@@ -45,13 +49,19 @@
 			</div>
 		</div>
 	</nav>
-</header>
 
-<body>
-	<div id="username">
-		<h1><%=name%>'s Movie List</h1>
+	<div class="container">
+		<div id="username" style="visibility: hidden;"><%=name%></div>
+		<div class="container" id="movie-feed"></div>
 	</div>
-	<div class="container" id="movie-feed"></div>
+</body>
+
+
+
+<div id="username">
+</div>
+
+<div class="container" id="movie-feed"></div>
 </body>
 
 <script>
@@ -59,20 +69,32 @@
 	var user;
 
 	var initPane = function() {
-		$("#movie-feed").after("<h1 id='movie-label' style='text-align: center;'>" + userName + "'s Movie List</h1>");
+		console.log("sdjf");
+		$("#movie-feed").after("<h1 id='movie-label' style='text-align: center;'><%= name=>'s Movie List</h1>");
 		if (user.movies.length == 0)
-			$("#movie-label").after("<h1> YOUR FRIEND DOESN'T HAVE ANY MOVIES. GO RECOMMEND A MOVIE YOU ASS. </h1>");
+			$("#movie-label").after("<p style='text-align: center;'> You don't have any movies right now. Add one below! </p>");
 		else {
 			for (var i = 0; i < user.movies.length; i++) {
-				$("#movie-label").after(
-						"<div class='jumbotron' style='margin-left: 375px; margin-right:350px;' id='" + user.movies[i].id + "'><div class='col-md-3'> <h2>" + user.movies[i].title + "</h2>	<h3 style='font-size: 18px'>Released: " + user.movies[i].date + "</h3><h3 style='font-size: 18px'> Rating: "
-								+ user.movies[i].rating + "</h3> </div><div class='col-md-6'><h3 style='text-align: left; font-size: 18px'>" + user.movies[i].desc + "</h3> </div> </div>");
+				$("#movie-label")
+						.after(
+								"<div class='jumbotron' style='margin-left: 50px; margin-right:50px;' id='" + user.movies[i].id + "'><div class='col-md-4'><img style='width: 70%; height:auto;' src='http://image.tmdb.org/t/p/w" + user.movies[i].image.width + user.movies[i].image.url + "'></div><div class='col-md-6 text-center' > <h2>"
+										+ user.movies[i].title
+										+ "</h2> <div class='row'> <h3 style='font-size: 16px'>Released: "
+										+ user.movies[i].date
+										+ "&nbsp &nbsp &nbsp &nbsp Rating: "
+										+ user.movies[i].rating
+										+ "</h3></div><h4 style='text-align: left; font-size: 16px'>" + user.movies[i].desc + "</h4> </div><div class='col-md-2'><form method='get' class='pull-right' action='/removeMovie/"+userName+"/"+user.movies[i].id+"'><button onclick='submit' class='btn btn-danger remove-btn'> <i class='glyphicon glyphicon-remove'> </i> </button></form></div> <div class='container'></div></div>");
 			}
 		}
 	}
+
 	$.get("/getLoggedUser/" + userName, function(data) {
 		user = data;
 		initPane();
+	});
+
+	$(document).ready(function() {
+
 	});
 </script>
 

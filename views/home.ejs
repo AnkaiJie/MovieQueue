@@ -61,21 +61,29 @@
 	</div>
 </body>
 
-<<<<<<< HEAD
+
+
+
 <script>
 	var userName = $('#username').text();
 	var user;
 
 	var initPane = function() {
 		console.log("sdjf");
-		$("#movie-feed").after("<h1 id='movie-label' style='text-align: center;'>Your Movie List</h1>");
+		$("#movie-feed").after("<h1 id='movie-label' style='text-align: center; font-family: Tangerine; font-size:60;'>Your Movie List</h1>");
 		if (user.movies.length == 0)
-			$("#movie-label").after("<h1 style='text-align: center;'> YOU DON'T HAVE ANY MOVIES. LOOK FOR ONE BELOW OR SEARCH YOUR FRIENDS </h1>");
+			$("#movie-label").after("<p style='text-align: center;'> You don't have any movies right now. Add one below! </p>");
 		else {
 			for (var i = 0; i < user.movies.length; i++) {
-				$("#movie-label").after(
-						"<div class='jumbotron' style='margin-left: 100px; margin-right:100px;' id='" + user.movies[i].id + "'><div class='col-md-3'> <h2>" + user.movies[i].title + "</h2>	<h3 style='font-size: 18px'>Released: " + user.movies[i].date + "</h3><h3 style='font-size: 18px'> Rating: "
-								+ user.movies[i].rating + "</h3> </div><div class='col-md-6'><h3 style='text-align: left; font-size: 18px'>" + user.movies[i].desc + "</h3> </div> <div class='container'><button type='button' class='btn btn-danger' style='float: right;'>Remove Movie</button></div>");
+				$("#movie-label")
+						.after(
+								"<div class='jumbotron' style='margin-left: 50px; margin-right:50px;' id='" + user.movies[i].id + "'><div class='col-md-4'><img style='width: 70%; height:auto;' src='http://image.tmdb.org/t/p/w" + user.movies[i].image.width + user.movies[i].image.url + "'></div><div class='col-md-6 text-center' > <h2>"
+										+ user.movies[i].title
+										+ "</h2> <div class='row'> <h3 style='font-size: 16px'>Released: "
+										+ user.movies[i].date
+										+ "&nbsp &nbsp &nbsp &nbsp Rating: "
+										+ user.movies[i].rating
+										+ "</h3></div><h4 style='text-align: left; font-size: 16px'>" + user.movies[i].desc + "</h4> </div><div class='col-md-2'><form method='get' class='pull-right' action='/removeMovie/"+userName+"/"+user.movies[i].id+"'><button onclick='submit' class='btn btn-danger remove-btn'> <i class='glyphicon glyphicon-remove'> </i> </button></form></div> <div class='container'></div></div>");
 			}
 		}
 	}
@@ -84,52 +92,22 @@
 		user = data;
 		initPane();
 	});
-=======
-<script>    
-    var userName = $('#username').text();
-    var user;
-    
-    var initPane = function() {
-        console.log("sdjf");
-        $("#movie-feed").after("<h1 id='movie-label' style='text-align: center;'>Your Movie List</h1>");
-        if (user.movies.length == 0)
-            $("#movie-label").after("<h1 style='text-align: center;'> YOU DON'T HAVE ANY MOVIES. LOOK FOR ONE BELOW OR SEARCH YOUR FRIENDS </h1>");
-        else{
-            for (var i=0; i<4; i++){
-                $("#movie-label").after("<div class='jumbotron' style='margin-left: 275px; margin-right:275px;' id='" + user.movies[i].id + "'><div class='col-md-3'> <h2>" + user.movies[i].title + "</h2> <h3 style='font-size: 18px'>Released: " + user.movies[i].date + "</h3><h3 style='font-size: 18px'> Rating: " + user.movies[i].rating + "</h3> </div><div class='col-md-6' style='margin-left:20px'><h3 style='text-align: left; font-size: 18px'>" + user.movies[i].desc + "</h3> </div> <div class='container'><form method='get' action='/removeMovie/"+userName+"/"+user.movies[i].id+"'><button onclick='submit' class='btn btn-danger'>Remove Movie</button></form></div>");
-            }
-        }
-    }
-    
-    $.get("/getLoggedUser/" + userName, function(data) {
-                user = data;
-                initPane();
-    });
-    
-    $(document).ready(function(){
-        
-    });
 
+	$(document).ready(function() {
 
-/*    
-for (var i=0; i<4; i++){
-    $("#movie-label").after("<div class='jumbotron' style='margin-left: 275px; margin-right:275px;' id='" + user.movies[i].id + "'><div class='col-md-3'> <h2>" + user.movies[i].title + "</h2> <h3 style='font-size: 18px'>Released: " + user.movies[i].date + "</h3><h3 style='font-size: 18px'> Rating: " + user.movies[i].rating + "</h3> </div><div class='col-md-6' style='margin-left:20px'><h3 style='text-align: left; font-size: 18px'>" + user.movies[i].desc + "</h3> </div> <div class='container'><form method='get' action='/removeMovie/"+userName+"/"+user.movies[i].id"'><button type='submit' class='btn btn-danger'>Remove Movie</button></form></div>");
-}
+	});
 
-*/
-/*for (var i=0; i<4; i++){
-                $("#movie-label").after("<div class='jumbotron' style='margin-left: 275px; margin-right:275px;' id='" + user.movies[i].id + "'><div class='col-md-3'> <h2>" + user.movies[i].title + "</h2> <h3 style='font-size: 18px'>Released: " + user.movies[i].date + "</h3><h3 style='font-size: 18px'> Rating: " + user.movies[i].rating + "</h3> </div><div class='col-md-6' style='margin-left:20px'><h3 style='text-align: left; font-size: 18px'>" + user.movies[i].desc + "</h3> </div> <div class='container'><button type='button' class='btn btn-danger''>Remove Movie</button></div>");
-            } */
+	// 	for (var i = 0; i < 4; i++) {
+	// 		$("#movie-label").after(
+	// 				"<div class='jumbotron' style='margin-left: 275px; margin-right:275px;' id='" + user.movies[i].id + "'><div class='col-md-3'> <h2>" + user.movies[i].title + "</h2> <h3 style='font-size: 18px'>Released: " + user.movies[i].date + "</h3><h3 style='font-size: 18px'> Rating: "
+	// 						+ user.movies[i].rating + "</h3> </div><div class='col-md-6' style='margin-left:20px'><h3 style='text-align: left; font-size: 18px'>" + user.movies[i].desc
+	// 						+ "</h3> </div> <div class='container'><form method='get' action='/removeMovie/"+userName+"/"+user.movies[i].id"'><button type='submit' class='btn btn-danger'><i class="glyphicon glyphicon-remove"></i></button></form></div>");
+	// 	}
 </script>
 
-    
-    <!-- Bootstrap core JavaScript
-=======
->>>>>>> 1be5bb003dcffb73e95d7ffa8435655579d60849
-</script>
 
 <!-- Bootstrap core JavaScript
->>>>>>> 74bd5e9d0dede278eaf96a825da289fad24fa4d7
+
     ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
