@@ -42,8 +42,7 @@ module.exports = function(app, passport, User) {
 			if (err)
 				console.log("error:" + err);
 			else {
-				request('https://api.themoviedb.org/3/search/movie?query=' + keyword + '&api_key=deca429e8664eb1b24c07c143d64068b',
-						function(error, response, body) {
+				request('https://api.themoviedb.org/3/search/movie?query=' + keyword + '&api_key=deca429e8664eb1b24c07c143d64068b', function(error, response, body) {
 					if (!error && response.statusCode == 200) {
 						console.log(body);
 						var json = JSON.parse(body);
@@ -87,7 +86,11 @@ module.exports = function(app, passport, User) {
 		req.logout();
 		res.redirect('/');
 	});
-
+	
+	app.get('/test', function(req,res){
+		res.json(["a","b"]);
+	});
+	
 	function isLoggedIn(req, res, next) {
 		console.log('in isLoggedIn function');
 		// if user is authenticated in the session, carry on
