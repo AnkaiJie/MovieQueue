@@ -117,7 +117,7 @@ module.exports = function(app, passport, User) {
 			for (var i = 0; i < user.movies.length; i++) {
 				if (err)
 					console.log('error: ' + err);
-				if (i == id) {
+				if (id == user.movies[i].id) {
 					user.movies.splice(i, 1);
 					user.save();
 				}
