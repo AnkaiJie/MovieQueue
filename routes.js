@@ -2,9 +2,12 @@ var path = require('path');
 var express = require('express');
 var facebook = require('./app/fbFriends.js');
 var request = require('request');
+var router = express.Router();
+var bodyParser = require('body-parser');
 
 module.exports = function(app, passport, User) {
 
+	app.use(bodyParser.json());
 	app.get('/', function(req, res) {
 		res.render('index.ejs');
 	});
@@ -31,13 +34,29 @@ module.exports = function(app, passport, User) {
 					res.render('home.ejs', {
 						name : name,
 						id : id,
-						movies: movies
+						movies : movies
 					});
 				});
 			} else {
 				// console.log("not logged in");
 				res.render('index.ejs');
 			}
+		});
+	});
+
+	app.get('/getAllUsers', function(req, res) {
+		// var name = req.params.name;
+		// User.findOne({
+		// 'facebook.name' : name
+		// }, function(err, user) {
+		// if (err)
+		// console.log(err);
+		// else
+		// res.json(user);
+		// });
+		User.find({}, function(err, doc) {
+			console.log(doc);
+			res.json(doc);
 		});
 	});
 
