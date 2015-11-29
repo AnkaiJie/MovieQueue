@@ -21,8 +21,10 @@ module.exports = function(app, passport, User) {
 					console.log(user.facebook.friends.data);
 					user.save();
 					var name = user.facebook.name;
+					var id = user._id;
 					res.render('home.ejs', {
-						name : name
+						name : name,
+						id : id
 					});
 				});
 			} else {
@@ -34,11 +36,9 @@ module.exports = function(app, passport, User) {
 
 	app.post('/addMovie', function(req, res) {
 		var keyword = req.body.keyword;
-		var user_name = req.body.name;
+		var user_name = req.body.id;
 
-		User.findOne({
-			'facebook.name' : user_name
-		}, function(err, user) {
+		User.findById(id, function(err, user) {
 			if (err)
 				console.log("error:" + err);
 			else {
@@ -56,7 +56,7 @@ module.exports = function(app, passport, User) {
 						user.movies.push(movieInfo);
 						user.save();
 						console.log(user);
-						res.send(user);
+						res.json(user.movies);
 					}
 				});
 			}
@@ -73,24 +73,26 @@ module.exports = function(app, passport, User) {
 		failureRedirect : '/'
 	}));
 
-	app.get('/search', function(req, res) {
-		var findName = req.params.name;
-		User.findone({
-			name : findName
-		}, function(err, user) {
-
-		})
+	app.post('/search', function(req, res) {
+		var userId = req.body.id;
+		User.findById(userId, function(err, user) {
+			if (err)
+				console.log ('erro: '+err);
+			else {
+				res.json({
+					friendName: user.facebook.name,
+					friendMovies: user.movies
+				});
+			}
+		});
 	});
 
 	app.get('/logout', function(req, res) {
 		req.logout();
 		res.redirect('/');
 	});
-	
-	app.get('/test', function(req,res){
-		res.json(["a","b"]);
-	});
-	
+
+
 	function isLoggedIn(req, res, next) {
 		console.log('in isLoggedIn function');
 		// if user is authenticated in the session, carry on
