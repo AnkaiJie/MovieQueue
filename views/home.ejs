@@ -11,6 +11,8 @@
 <link rel="stylesheet" href="custom.css">
 <link rel="stylesheet"
 	href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 <header>
 	<nav class="navbar navbar-inverse navbar-static-top">
@@ -44,6 +46,7 @@
 	</nav>
 </header>
 <body>
+<<<<<<< HEAD
 	<div id = "user_id" ><%=name%></div>
     <div class="container">
         <h1>Movie List</h1>
@@ -79,6 +82,10 @@
     </div-->
 	<div id="cool"></div>
 	<div class="col-md-4">
+=======
+	<div id="cool"><%=name%></div>
+	<form action="/search" method="post">
+>>>>>>> c41a42c93752f9ef327e28bedaced98b237d1dc6
 		<div class="form-group">
 			<label>Search</label> <input type="text" class="form-control"
 				name="searchterm" required></label>
@@ -97,6 +104,7 @@
 		// 			$("#cool").append(container);
 
 		//});
+<<<<<<< HEAD
         //alert("here");
         /*var list = [ "movie1", "movie2" ];
         //var contentString() = new Array();
@@ -104,6 +112,16 @@
             var container = document.createElement("div");
 
             container.innerHTML = movie;
+=======
+		var userName = $('#cool').text();
+		var user;
+		$.get("/getLoggedUser/" + user, function(data) {
+			console.log(data);
+			user = data;
+		});
+	</script>
+</body>
+>>>>>>> c41a42c93752f9ef327e28bedaced98b237d1dc6
 
             $("#cool").append(container);
         
