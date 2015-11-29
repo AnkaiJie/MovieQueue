@@ -67,7 +67,7 @@
 		//});
 		var userName = $('#cool').text();
 		var user;
-		$.get("/getLoggedUser/" + user, function(data) {
+		$.get("/getLoggedUser/" + userName, function(data) {
 			console.log(data);
 			user = data;
 		});
