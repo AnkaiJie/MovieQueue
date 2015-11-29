@@ -25,6 +25,7 @@ module.exports = function(app, passport, User) {
 						name : name,
 					var id = user._id;
 					var movies = user.movies;
+					)};
 					console.log(id);
 					console.log(user);
 					res.render('home.ejs', {
