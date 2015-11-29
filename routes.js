@@ -7,7 +7,6 @@ var bodyParser = require('body-parser');
 
 module.exports = function(app, passport, User) {
 
-	app.use(bodyParser.json());
 	app.get('/', function(req, res) {
 		res.render('index.ejs');
 	});
@@ -40,20 +39,20 @@ module.exports = function(app, passport, User) {
 		});
 	});
 
-	app.get('/getAllUsers', function(req, res) {
-		// var name = req.params.name;
-		// User.findOne({
-		// 'facebook.name' : name
-		// }, function(err, user) {
-		// if (err)
-		// console.log(err);
-		// else
-		// res.json(user);
-		// });
-		User.find({}, function(err, doc) {
-			console.log(doc);
-			res.json(doc);
+	app.get('/getLoggedUser/:name', function(req, res) {
+		var name = req.params.name;
+		User.findOne({
+			'facebook.name' : name
+		}, function(err, user) {
+			if (err)
+				console.log(err);
+			else
+				res.json(user);
 		});
+		// User.find({}, function(err, doc) {
+		// console.log(doc);
+		// res.send(doc);
+		// });
 	});
 
 	app.post('/addMovie', function(req, res) {
