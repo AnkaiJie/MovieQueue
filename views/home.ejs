@@ -1,70 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<title>Home | MovieQueue</title>
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="custom.css">
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Home | MovieQueue</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="custom.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
     
-<header>
-    <nav class="navbar navbar-inverse navbar-static-top">
-        <div class="container">
-            <div class="navbar-header" style="padding-top: 5px">
-                <a href="index.ejs"> <img src="logo.png"
-                    style="width: 180px; height: 60px; border: 0">
-                </a>
-            </div>
-            <div class="col-sm-3 col-md-7">
-                <form class="navbar" role="search" style="padding-top: 15px">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search"
-                            name="srch-term" id="srch-term">
-                        <div class="input-group-btn">
-                            <button class="btn btn-default" type="submit">
-                                <i class="glyphicon glyphicon-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="container">
-                <ul class="nav navbar-nav navbar-right" style="padding-top: 7px">
-                    <li><a href="/#">Home</a></li>
-                    <li><a href="/#">About</a></li>
-                    <li><a href="/#">Log out</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
-    
 <body>
-    <div id="username" style="visibility: hidden;"><%=name%></div>
-    <div class="container" id="movie-feed">
-    </div>
+    <nav class="navbar navbar-inverse navbar-static-top">
+		<div class="container">
+			<div class="navbar-header" style="padding-top: 5px">
+				<a href="/home"> <img src="logo.png"
+					style="width: 180px; height: 60px; border: 0">
+				</a>
+			</div>
+			<div class="col-sm-3 col-md-7">
+				<form class="navbar" action="/search" method="post" style="padding-top: 15px">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Search"
+							name="name">
+						<div class="input-group-btn">
+							<button class="btn btn-default" onclick="submit">
+								<i class="glyphicon glyphicon-search"></i>
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="container">
+				<ul class="nav navbar-nav navbar-right" style="padding-top: 7px">
+					<li><a href="/home">Home</a></li>
+					<li><a href="/">About</a></li>
+					<li><a href="/logout">Log out</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+		<div id="username" style="visibility: hidden;"><%=name%></div>
+		<div class="container" id="movie-feed"></div>
+
+		<div class="form-input text-center">
+			<form action="/addMovie" method="post">
+				<input type="text" name="keyword" /> <input type="hidden"
+					name="name" value="<%= name%>">
+				<button onclick="submit" class="btn btn-primary">Add Movie</button>
+			</form>
+		</div>
+	</div>
 </body>
-    
-<script>
-    /*var obj = [{
-        "id": 13,
-        "title": "Forrest Gump",
-        "date": "1994-06-22",
-        "rating": 7.9,
-        "desc": "First Movie"
-    }, {
-        "id": 133123,
-        "title": "Ip Man",
-        "date": "1999-06-25",
-        "rating": 9.9,
-        "desc": "Second Movie"
-    }];*/
-    
+
+<script>    
     var userName = $('#username').text();
     var user;
     
@@ -72,15 +65,15 @@
         console.log("sdjf");
         $("#movie-feed").after("<h1 id='movie-label' style='text-align: center;'>Your Movie List</h1>");
         if (user.movies.length == 0)
-            $("#movie-label").after("<h1> YOU DON'T HAVE ANY MOVIES. LOOK FOR ONE BELOW OR SEARCH YOUR FRIENDS </h1>");
+            $("#movie-label").after("<h1 style='text-align: center;'> YOU DON'T HAVE ANY MOVIES. LOOK FOR ONE BELOW OR SEARCH YOUR FRIENDS </h1>");
         else{
             for (var i=0; i<4; i++){
                 $("#movie-label").after("<div class='jumbotron' style='margin-left: 275px; margin-right:275px;' id='" + user.movies[i].id + "'><div class='col-md-3'> <h2>" + user.movies[i].title + "</h2> <h3 style='font-size: 18px'>Released: " + user.movies[i].date + "</h3><h3 style='font-size: 18px'> Rating: " + user.movies[i].rating + "</h3> </div><div class='col-md-6' style='margin-left:20px'><h3 style='text-align: left; font-size: 18px'>" + user.movies[i].desc + "</h3> </div> <div class='container'><form method='get' action='/removeMovie/"+userName+"/"+user.movies[i].id+"'><button onclick='submit' class='btn btn-danger'>Remove Movie</button></form></div>");
             }
         }
     }
+    
     $.get("/getLoggedUser/" + userName, function(data) {
-                console.log("asdfasdfasfasdfasdfasdfasdf");
                 user = data;
                 initPane();
     });
@@ -103,9 +96,17 @@ for (var i=0; i<4; i++){
 
     
     <!-- Bootstrap core JavaScript
+=======
+</script>
+
+<!-- Bootstrap core JavaScript
+>>>>>>> 74bd5e9d0dede278eaf96a825da289fad24fa4d7
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+	window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
+</script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </html>
