@@ -70,7 +70,7 @@
 
 	var initPane = function() {
 		console.log("sdjf");
-		$("#movie-feed").after("<h1 id='movie-label' style='text-align: center;'><%= name=>'s Movie List</h1>");
+		$("#movie-feed").after("<h1 id='movie-label' style='text-align: center;'><%=name>'s Movie List</h1>");
 		if (user.movies.length == 0)
 			$("#movie-label").after("<p style='text-align: center;'> You don't have any movies right now. Add one below! </p>");
 		else {
