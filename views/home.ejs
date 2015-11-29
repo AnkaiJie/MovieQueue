@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Home | MovieQueue</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="custom.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>Home | MovieQueue</title>
+<link rel="stylesheet"
+	href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="custom.css">
+<link rel="stylesheet"
+	href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
-    
+
 <body>
-    <nav class="navbar navbar-inverse navbar-static-top">
+	<nav class="navbar navbar-inverse navbar-static-top">
 		<div class="container">
 			<div class="navbar-header" style="padding-top: 5px">
 				<a href="/home"> <img src="logo.png"
@@ -21,10 +24,11 @@
 				</a>
 			</div>
 			<div class="col-sm-3 col-md-7">
-				<form class="navbar" action="/search" method="post" style="padding-top: 15px">
+				<form class="navbar" action="/search" method="post"
+					style="padding-top: 15px">
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search"
-							name="name">
+						<input type="text" class="form-control"
+							placeholder="Search For a Friend" name="name">
 						<div class="input-group-btn">
 							<button class="btn btn-default" onclick="submit">
 								<i class="glyphicon glyphicon-search"></i>
@@ -57,6 +61,30 @@
 	</div>
 </body>
 
+<<<<<<< HEAD
+<script>
+	var userName = $('#username').text();
+	var user;
+
+	var initPane = function() {
+		console.log("sdjf");
+		$("#movie-feed").after("<h1 id='movie-label' style='text-align: center;'>Your Movie List</h1>");
+		if (user.movies.length == 0)
+			$("#movie-label").after("<h1 style='text-align: center;'> YOU DON'T HAVE ANY MOVIES. LOOK FOR ONE BELOW OR SEARCH YOUR FRIENDS </h1>");
+		else {
+			for (var i = 0; i < user.movies.length; i++) {
+				$("#movie-label").after(
+						"<div class='jumbotron' style='margin-left: 100px; margin-right:100px;' id='" + user.movies[i].id + "'><div class='col-md-3'> <h2>" + user.movies[i].title + "</h2>	<h3 style='font-size: 18px'>Released: " + user.movies[i].date + "</h3><h3 style='font-size: 18px'> Rating: "
+								+ user.movies[i].rating + "</h3> </div><div class='col-md-6'><h3 style='text-align: left; font-size: 18px'>" + user.movies[i].desc + "</h3> </div> <div class='container'><button type='button' class='btn btn-danger' style='float: right;'>Remove Movie</button></div>");
+			}
+		}
+	}
+
+	$.get("/getLoggedUser/" + userName, function(data) {
+		user = data;
+		initPane();
+	});
+=======
 <script>    
     var userName = $('#username').text();
     var user;
@@ -97,6 +125,7 @@ for (var i=0; i<4; i++){
     
     <!-- Bootstrap core JavaScript
 =======
+>>>>>>> 1be5bb003dcffb73e95d7ffa8435655579d60849
 </script>
 
 <!-- Bootstrap core JavaScript
