@@ -39,21 +39,6 @@ module.exports = function(app, passport, User) {
 		});
 	});
 
-<<<<<<< HEAD
-	app.get('/getAllUsers', function(req, res) {
-		// var name = req.params.name;
-		// User.findOne({
-		// 'facebook.name' : name
-		// }, function(err, user) {
-		// if (err)
-		// console.log(err);
-		// else
-		// res.json(user);
-		// });
-		User.find({}, function(err, doc) {
-			console.log(doc);
-			res.send(doc);
-=======
 	app.get('/getLoggedUser/:name', function(req, res) {
 		var name = req.params.name;
 		User.findOne({
@@ -63,7 +48,6 @@ module.exports = function(app, passport, User) {
 				console.log(err);
 			else
 				res.json(user);
->>>>>>> c41a42c93752f9ef327e28bedaced98b237d1dc6
 		});
 		// User.find({}, function(err, doc) {
 		// console.log(doc);
@@ -129,7 +113,7 @@ module.exports = function(app, passport, User) {
 			for (var i = 0; i < user.movies.length; i++) {
 				if (err)
 					console.log('error: ' + err);
-				if (i == id) {
+				if (id == user.movies[i].id) {
 					user.movies.splice(i, 1);
 					user.save();
 				}
@@ -154,7 +138,7 @@ module.exports = function(app, passport, User) {
 	app.post('/search', function(req, res) {
 		var name = req.body.name;
 		User.findOne({
-			'facebook.name' : req.user.facebook.name
+			'facebook.name' : name
 		}, function(err, user) {
 			if (err)
 				console.log('error: ' + err);

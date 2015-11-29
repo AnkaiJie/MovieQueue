@@ -13,141 +13,38 @@
 </head>
     
 <header>
-	<nav class="navbar navbar-inverse navbar-static-top">
-		<div class="container">
-			<div class="navbar-header" style="padding-top: 5px">
-				<a href="index.ejs"> <img src="logo.png"
-					style="width: 180px; height: 60px; border: 0">
-				</a>
-			</div>
-			<div class="col-sm-3 col-md-7">
-				<form class="navbar" role="search" style="padding-top: 15px">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search"
-							name="srch-term" id="srch-term">
-						<div class="input-group-btn">
-							<button class="btn btn-default" type="submit">
-								<i class="glyphicon glyphicon-search"></i>
-							</button>
-						</div>
-					</div>
-				</form>
-			</div>
-			<div class="container">
-				<ul class="nav navbar-nav navbar-right" style="padding-top: 7px">
-					<li><a href="/#">Home</a></li>
-					<li><a href="/#">About</a></li>
-					<li><a href="/#">Log out</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+    <nav class="navbar navbar-inverse navbar-static-top">
+        <div class="container">
+            <div class="navbar-header" style="padding-top: 5px">
+                <a href="index.ejs"> <img src="logo.png"
+                    style="width: 180px; height: 60px; border: 0">
+                </a>
+            </div>
+            <div class="col-sm-3 col-md-7">
+                <form class="navbar" role="search" style="padding-top: 15px">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search"
+                            name="srch-term" id="srch-term">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="container">
+                <ul class="nav navbar-nav navbar-right" style="padding-top: 7px">
+                    <li><a href="/#">Home</a></li>
+                    <li><a href="/#">About</a></li>
+                    <li><a href="/#">Log out</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 </header>
     
 <body>
-<<<<<<< HEAD
-<<<<<<< HEAD
-	<div id = "user_id" ><%=name%></div>
-    <div class="container">
-        <h1>Movie List</h1>
-        <div id = "Movie List" >
-            <div class="jumbotron">
-                <div class="col-md-3">
-                    <h3 style="font-size: 18px"><=%title%=></h3>
-                    <h3 style="font-size: 18px"><=%date%=></h3>
-                    <h3 style="font-size: 18px"><=%rating%=></h3>
-                </div>
-                <div class="col-md-6">
-                    <h3 style="text-align: left; font-size: 18px"><=%summary%=></h3>
-                </div>
-                <div class="container">
-                    <button type="button" class="btn btn-danger" style="text-align: right">Remove
-                        Movie</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    </div>
-    <!--div class="row">
-        <div class="col-md-4">.col-md-1</div>
-            <form action="/search" method="post">
-                <div class="form-group">
-                    <label>Search</label> <input type="text" class="form-control" name="searchterm" required>
-                </div>
-                <button type="submit" class="glyphicon glyphicon-search">
-                </button>
-            </form>
-        </div>
-    </div-->
-	<div id="cool"></div>
-	<div class="col-md-4">
-=======
-	<div id="cool"><%=name%></div>
-	<form action="/search" method="post">
->>>>>>> c41a42c93752f9ef327e28bedaced98b237d1dc6
-		<div class="form-group">
-			<label>Search</label> <input type="text" class="form-control"
-				name="searchterm" required></label>
-		</div>
-    </div>
-		<button tclass="glyphicon glyphicon-search"></button>
-
-	<script>
-		// 		var list = [ "movie1", "movie2" ];
-
-		// 		list.forEach(function(movie) {
-		// 			var container = document.createElement("div");
-
-		// 			container.innerHTML = movie;
-
-		// 			$("#cool").append(container);
-
-		//});
-<<<<<<< HEAD
-        //alert("here");
-        /*var list = [ "movie1", "movie2" ];
-        //var contentString() = new Array();
-        list.forEach(function(movie) {
-            var container = document.createElement("div");
-
-            container.innerHTML = movie;
-=======
-		var userName = $('#cool').text();
-		var user;
-		$.get("/getLoggedUser/" + user, function(data) {
-			console.log(data);
-			user = data;
-		});
-	</script>
-</body>
->>>>>>> c41a42c93752f9ef327e28bedaced98b237d1dc6
-
-            $("#cool").append(container);
-        
-        });
-        var name = safg;
-        var data = new FormData();
-data.append('name', 'Bob'); */
-
-$(document).ready(function(){   
-    $.ajax({
-        url: "/getAllUsers",
-        dataType: "json"
-    }).success(function(data){
-        console.log(data);
-        $('#cool').append(JSON.stringify(data));
-    });
-});
-	</script>
-</body>
-<script
-	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<!--     <script src="./js/ie10-viewport-bug-workaround.js"></script> -->
-</html>
-
-=======
     <div id="username" style="visibility: hidden;"><%=name%></div>
     <div class="container" id="movie-feed">
     </div>
@@ -178,7 +75,7 @@ $(document).ready(function(){
             $("#movie-label").after("<h1> YOU DON'T HAVE ANY MOVIES. LOOK FOR ONE BELOW OR SEARCH YOUR FRIENDS </h1>");
         else{
             for (var i=0; i<4; i++){
-                $("#movie-label").after("<div class='jumbotron' style='margin-left: 375px; margin-right:350px;' id='" + user.movies[i].id + "'><div class='col-md-3'> <h2>" + user.movies[i].title + "</h2>	<h3 style='font-size: 18px'>Released: " + user.movies[i].date + "</h3><h3 style='font-size: 18px'> Rating: " + user.movies[i].rating + "</h3> </div><div class='col-md-6'><h3 style='text-align: left; font-size: 18px'>" + user.movies[i].desc + "</h3> </div> <div class='container'><button type='button' class='btn btn-danger' style='float: right;'>Remove Movie</button><\div>");
+                $("#movie-label").after("<div class='jumbotron' style='margin-left: 275px; margin-right:275px;' id='" + user.movies[i].id + "'><div class='col-md-3'> <h2>" + user.movies[i].title + "</h2> <h3 style='font-size: 18px'>Released: " + user.movies[i].date + "</h3><h3 style='font-size: 18px'> Rating: " + user.movies[i].rating + "</h3> </div><div class='col-md-6' style='margin-left:20px'><h3 style='text-align: left; font-size: 18px'>" + user.movies[i].desc + "</h3> </div> <div class='container'><form method='get' action='/removeMovie/"+userName+"/"+user.movies[i].id+"'><button onclick='submit' class='btn btn-danger'>Remove Movie</button></form></div>");
             }
         }
     }
@@ -192,8 +89,18 @@ $(document).ready(function(){
         
     });
 
-    
+
+/*    
+for (var i=0; i<4; i++){
+    $("#movie-label").after("<div class='jumbotron' style='margin-left: 275px; margin-right:275px;' id='" + user.movies[i].id + "'><div class='col-md-3'> <h2>" + user.movies[i].title + "</h2> <h3 style='font-size: 18px'>Released: " + user.movies[i].date + "</h3><h3 style='font-size: 18px'> Rating: " + user.movies[i].rating + "</h3> </div><div class='col-md-6' style='margin-left:20px'><h3 style='text-align: left; font-size: 18px'>" + user.movies[i].desc + "</h3> </div> <div class='container'><form method='get' action='/removeMovie/"+userName+"/"+user.movies[i].id"'><button type='submit' class='btn btn-danger'>Remove Movie</button></form></div>");
+}
+
+*/
+/*for (var i=0; i<4; i++){
+                $("#movie-label").after("<div class='jumbotron' style='margin-left: 275px; margin-right:275px;' id='" + user.movies[i].id + "'><div class='col-md-3'> <h2>" + user.movies[i].title + "</h2> <h3 style='font-size: 18px'>Released: " + user.movies[i].date + "</h3><h3 style='font-size: 18px'> Rating: " + user.movies[i].rating + "</h3> </div><div class='col-md-6' style='margin-left:20px'><h3 style='text-align: left; font-size: 18px'>" + user.movies[i].desc + "</h3> </div> <div class='container'><button type='button' class='btn btn-danger''>Remove Movie</button></div>");
+            } */
 </script>
+
     
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -202,4 +109,3 @@ $(document).ready(function(){
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </html>
->>>>>>> e402c0ae74c58dbb04cd88006b9ce2629aab17eb
