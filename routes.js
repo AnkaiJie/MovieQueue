@@ -18,13 +18,16 @@ module.exports = function(app, passport, User) {
 			} else if (user != null) {
 				facebook.getFbData(user.facebook.token, '/me/friends', function(data) {
 					user.facebook.friends = JSON.parse(data);
-					console.log(user.facebook.friends.data);
 					user.save();
 					var name = user.facebook.name;
 					var id = user._id;
+					var movies = user.movies;
+					console.log(id);
+					console.log(user);
 					res.render('home.ejs', {
 						name : name,
-						id : id
+						id : id,
+						movies: movies
 					});
 				});
 			} else {
@@ -36,12 +39,15 @@ module.exports = function(app, passport, User) {
 
 	app.post('/addMovie', function(req, res) {
 		var keyword = req.body.keyword;
-		var user_name = req.body.id;
+		var name = req.body.name;
 
-		User.findById(id, function(err, user) {
+		User.findOne({
+			'facebook.name' : name
+		}, function(err, user) {
 			if (err)
 				console.log("error:" + err);
 			else {
+				console.log(user);
 				request('https://api.themoviedb.org/3/search/movie?query=' + keyword + '&api_key=deca429e8664eb1b24c07c143d64068b', function(error, response, body) {
 					if (!error && response.statusCode == 200) {
 						console.log(body);
@@ -74,14 +80,16 @@ module.exports = function(app, passport, User) {
 	}));
 
 	app.post('/search', function(req, res) {
-		var userId = req.body.id;
-		User.findById(userId, function(err, user) {
+		var name = req.body.name;
+		User.findOne({
+			'facebook.name' : name
+		}, function(err, user) {
 			if (err)
-				console.log ('erro: '+err);
+				console.log('error: ' + err);
 			else {
 				res.json({
-					friendName: user.facebook.name,
-					friendMovies: user.movies
+					friendName : user.facebook.name,
+					friendMovies : user.movies
 				});
 			}
 		});
@@ -91,7 +99,6 @@ module.exports = function(app, passport, User) {
 		req.logout();
 		res.redirect('/');
 	});
-
 
 	function isLoggedIn(req, res, next) {
 		console.log('in isLoggedIn function');
