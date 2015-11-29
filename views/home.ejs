@@ -23,14 +23,14 @@
 			<div class="col-sm-3 col-md-7">
 				<form class="navbar" action="/search" method="post" style="padding-top: 15px">
 					<div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search"
-                                name="name">
-                            <div class="input-group-btn">
-                                <button class="btn btn-default" onclick="submit">
-                                    <i class="glyphicon glyphicon-search"></i>
-                                </button>
-                            </div>
-				    </div>
+						<input type="text" class="form-control" placeholder="Search"
+							name="name">
+						<div class="input-group-btn">
+							<button class="btn btn-default" onclick="submit">
+								<i class="glyphicon glyphicon-search"></i>
+							</button>
+						</div>
+					</div>
 				</form>
 			</div>
 			<div class="container">
@@ -42,13 +42,22 @@
 			</div>
 		</div>
 	</nav>
-    <div id="username"><%=name%></div>
-    <div class="container" id="movie-feed">
-    </div>
+
+	<div class="container">
+		<div id="username" style="visibility: hidden;"><%=name%></div>
+		<div class="container" id="movie-feed"></div>
+
+		<div class="form-input text-center">
+			<form action="/addMovie" method="post">
+				<input type="text" name="keyword" /> <input type="hidden"
+					name="name" value="<%= name%>">
+				<button onclick="submit" class="btn btn-primary">Add Movie</button>
+			</form>
+		</div>
+	</div>
 </body>
-    
-<script>
-    
+
+<script>    
     var userName = $('#username').text();
     var user;
     
@@ -70,11 +79,14 @@
     });
     
 </script>
-    
-    <!-- Bootstrap core JavaScript
+
+<!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+	window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
+</script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </html>

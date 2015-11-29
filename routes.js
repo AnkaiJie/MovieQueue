@@ -56,9 +56,11 @@ module.exports = function(app, passport, User) {
 	});
 
 	app.post('/addMovie', function(req, res) {
+
 		var keyword = req.body.keyword;
 		var name = req.body.name;
-
+		console.log(keyword + name);
+		
 		User.findOne({
 			'facebook.name' : name
 		}, function(err, user) {
@@ -94,7 +96,9 @@ module.exports = function(app, passport, User) {
 							}
 							user.movies.push(movieInfo);
 							user.save();
-							res.json(user.movies);
+							res.render('home.ejs', {
+								name : user.facebook.name
+							});
 						});
 
 					}
@@ -113,7 +117,7 @@ module.exports = function(app, passport, User) {
 			for (var i = 0; i < user.movies.length; i++) {
 				if (err)
 					console.log('error: ' + err);
-				if (i == id) {
+				if (id == user.movies[i].id) {
 					user.movies.splice(i, 1);
 					user.save();
 				}
@@ -149,11 +153,9 @@ module.exports = function(app, passport, User) {
 				// id: user._id,
 				// movies: user.movies
 				// });
-                console.log("Made it here");
-                console.log(name);
-				res.render('friend.ejs', {
-                    name : user.facebook.name
-			    });
+				res.render('friend.ejs',{
+					name: user.facebook.name
+				});
 			}
 		});
 	});
