@@ -46,10 +46,6 @@ module.exports = function(passport) {
 					newUser.facebook.token = token;
 //					console.log(token);
 					newUser.facebook.name = profile.displayName;
-//					FB.api ('/me/friends', function (response){
-//						console.log (response);
-//						newUser.facebook.friends = response;
-//					});
 					// save our user to the database
 					newUser.save(function(err) {
 						if (err) {
