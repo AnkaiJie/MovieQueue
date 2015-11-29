@@ -81,27 +81,65 @@ module.exports = function(app, passport, User) {
 			if (err)
 				console.log("error:" + err);
 			else {
-				console.log(user);
 				request('https://api.themoviedb.org/3/search/movie?query=' + keyword + '&api_key=deca429e8664eb1b24c07c143d64068b', function(error, response, body) {
 					if (!error && response.statusCode == 200) {
-						console.log(body);
 						var json = JSON.parse(body);
 						var results = json.results[0];
-						var movieInfo = {
-							title : results.title,
-							date : results.release_date,
-							rating : results.vote_average
-						}
-						console.log(movieInfo);
-						user.movies.push(movieInfo);
-						user.save();
-						console.log(user);
-						res.json(user.movies);
+						var finalImg;
+
+						request('https://api.themoviedb.org/3/movie/' + results.id + '/images?api_key=deca429e8664eb1b24c07c143d64068b', function(error2, response2, body2) {
+							var imgRes = JSON.parse(body2);
+							for (var i = 0; i < imgRes.posters.length; i++) {
+
+								if (imgRes.posters[i].width == 1000) {
+									finalImg = {
+										url : imgRes.posters[i].file_path,
+										width : imgRes.posters[i].width
+									}
+									break;
+								}
+							}
+							console.log(finalImg);
+							var movieInfo = {
+								id : results.id,
+								title : results.title,
+								date : results.release_date,
+								rating : results.vote_average,
+								desc : results.overview,
+								image : finalImg
+							}
+							user.movies.push(movieInfo);
+							user.save();
+							res.json(user.movies);
+						});
+
 					}
 				});
 			}
 		});
 
+	});
+
+	app.get('/removeMovie/:name/:movId', function(req, res) {
+		var name = req.params.name;
+		var id = req.params.movId;
+		User.findOne({
+			'facebook.name' : name
+		}, function(err, user) {
+			for (var i = 0; i < user.movies.length; i++) {
+				if (err)
+					console.log('error: ' + err);
+				if (i == id) {
+					user.movies.splice(i, 1);
+					user.save();
+				}
+			}
+			res.render('home.ejs', {
+				name : user.facebook.name,
+				id : user._id,
+				movies : user.movies
+			});
+		});
 	});
 
 	app.get('/auth/facebook', passport.authenticate('facebook', {
@@ -121,10 +159,12 @@ module.exports = function(app, passport, User) {
 			if (err)
 				console.log('error: ' + err);
 			else {
-				res.json({
-					friendName : user.facebook.name,
-					friendMovies : user.movies
-				});
+				// res.render('friendMovieList.ejs',{
+				// name: user.facebook.name,
+				// id: user._id,
+				// movies: user.movies
+				// });
+				res.send(user);
 			}
 		});
 	});

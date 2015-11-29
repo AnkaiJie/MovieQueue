@@ -6,14 +6,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 <title>Home | MovieQueue</title>
-<link rel="stylesheet"
-	href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="custom.css">
-<link rel="stylesheet"
-	href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
+    
 <header>
 	<nav class="navbar navbar-inverse navbar-static-top">
 		<div class="container">
@@ -45,7 +43,9 @@
 		</div>
 	</nav>
 </header>
+    
 <body>
+<<<<<<< HEAD
 <<<<<<< HEAD
 	<div id = "user_id" ><%=name%></div>
     <div class="container">
@@ -147,3 +147,59 @@ $(document).ready(function(){
 <!--     <script src="./js/ie10-viewport-bug-workaround.js"></script> -->
 </html>
 
+=======
+    <div id="username" style="visibility: hidden;"><%=name%></div>
+    <div class="container" id="movie-feed">
+    </div>
+</body>
+    
+<script>
+    /*var obj = [{
+        "id": 13,
+        "title": "Forrest Gump",
+        "date": "1994-06-22",
+        "rating": 7.9,
+        "desc": "First Movie"
+    }, {
+        "id": 133123,
+        "title": "Ip Man",
+        "date": "1999-06-25",
+        "rating": 9.9,
+        "desc": "Second Movie"
+    }];*/
+    
+    var userName = $('#username').text();
+    var user;
+    
+    var initPane = function() {
+        console.log("sdjf");
+        $("#movie-feed").after("<h1 id='movie-label' style='text-align: center;'>Your Movie List</h1>");
+        if (user.movies.length == 0)
+            $("#movie-label").after("<h1> YOU DON'T HAVE ANY MOVIES. LOOK FOR ONE BELOW OR SEARCH YOUR FRIENDS </h1>");
+        else{
+            for (var i=0; i<4; i++){
+                $("#movie-label").after("<div class='jumbotron' style='margin-left: 375px; margin-right:350px;' id='" + user.movies[i].id + "'><div class='col-md-3'> <h2>" + user.movies[i].title + "</h2>	<h3 style='font-size: 18px'>Released: " + user.movies[i].date + "</h3><h3 style='font-size: 18px'> Rating: " + user.movies[i].rating + "</h3> </div><div class='col-md-6'><h3 style='text-align: left; font-size: 18px'>" + user.movies[i].desc + "</h3> </div> <div class='container'><button type='button' class='btn btn-danger' style='float: right;'>Remove Movie</button><\div>");
+            }
+        }
+    }
+    $.get("/getLoggedUser/" + userName, function(data) {
+                console.log("asdfasdfasfasdfasdfasdfasdf");
+                user = data;
+                initPane();
+    });
+    
+    $(document).ready(function(){
+        
+    });
+
+    
+</script>
+    
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</html>
+>>>>>>> e402c0ae74c58dbb04cd88006b9ce2629aab17eb

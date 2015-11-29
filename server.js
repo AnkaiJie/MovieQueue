@@ -39,13 +39,12 @@ var Movie = require('./models/movie.js');
 // Setting up router
 require('./routes.js')(app, passport, User);
 
-
 // Port Listen
 app.listen(port);
 console.log("We are rocking port: " + port);
 
-// User.remove({}, function(err) {
-// if (err)
-// throw err;
-// console.log("All Users Deleted");
-// });
+//User.remove({}, function(err) {
+//	if (err)
+//		throw err;
+//	console.log("All Users Deleted");
+//});
