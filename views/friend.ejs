@@ -6,12 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 <title>Home | MovieQueue</title>
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="custom.css">
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
-    
+
 <header>
 	<nav class="navbar navbar-inverse navbar-static-top">
 		<div class="container">
@@ -43,39 +46,43 @@
 		</div>
 	</nav>
 </header>
-    
+
 <body>
-    <div id="username"><%=name%></div>
-    <div class="container" id="movie-feed">
-    </div>
+	<div id="username">
+		<h1><%=name%>'s Movie List</h1>
+	</div>
+	<div class="container" id="movie-feed"></div>
 </body>
-    
+
 <script>
-    
-    var userName = $('#username').text();
-    var user;
-    
-    var initPane = function() {
-        $("#movie-feed").after("<h1 id='movie-label' style='text-align: center;'>" + userName + "'s Movie List</h1>");
-        if (user.movies.length == 0)
-            $("#movie-label").after("<h1> YOUR FRIEND DOESN'T HAVE ANY MOVIES. GO RECOMMEND A MOVIE YOU ASS. </h1>");
-        else{
-            for (var i=0; i<user.movies.length; i++){
-                $("#movie-label").after("<div class='jumbotron' style='margin-left: 375px; margin-right:350px;' id='" + user.movies[i].id + "'><div class='col-md-3'> <h2>" + user.movies[i].title + "</h2>	<h3 style='font-size: 18px'>Released: " + user.movies[i].date + "</h3><h3 style='font-size: 18px'> Rating: " + user.movies[i].rating + "</h3> </div><div class='col-md-6'><h3 style='text-align: left; font-size: 18px'>" + user.movies[i].desc + "</h3> </div> </div>");
-            }
-        }
-    }
-    $.get("/getLoggedUser/" + userName, function(data) {
-                user = data;
-                initPane();
-    });
-    
+	var userName = $('#username').text();
+	var user;
+
+	var initPane = function() {
+		$("#movie-feed").after("<h1 id='movie-label' style='text-align: center;'>" + userName + "'s Movie List</h1>");
+		if (user.movies.length == 0)
+			$("#movie-label").after("<h1> YOUR FRIEND DOESN'T HAVE ANY MOVIES. GO RECOMMEND A MOVIE YOU ASS. </h1>");
+		else {
+			for (var i = 0; i < user.movies.length; i++) {
+				$("#movie-label").after(
+						"<div class='jumbotron' style='margin-left: 375px; margin-right:350px;' id='" + user.movies[i].id + "'><div class='col-md-3'> <h2>" + user.movies[i].title + "</h2>	<h3 style='font-size: 18px'>Released: " + user.movies[i].date + "</h3><h3 style='font-size: 18px'> Rating: "
+								+ user.movies[i].rating + "</h3> </div><div class='col-md-6'><h3 style='text-align: left; font-size: 18px'>" + user.movies[i].desc + "</h3> </div> </div>");
+			}
+		}
+	}
+	$.get("/getLoggedUser/" + userName, function(data) {
+		user = data;
+		initPane();
+	});
 </script>
-    
-    <!-- Bootstrap core JavaScript
+
+<!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+	window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
+</script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </html>
