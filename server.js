@@ -29,7 +29,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-app.use (express.static("public"));
+app.use(express.static("public"));
 app.set('view engine', 'ejs');
 
 // DB Models
@@ -39,12 +39,13 @@ var Movie = require('./models/movie.js');
 // Setting up router
 require('./routes.js')(app, passport, User);
 
+
 // Port Listen
 app.listen(port);
 console.log("We are rocking port: " + port);
 
-//User.remove({}, function(err) {
-//	if (err)
-//		throw err;
-//	console.log("All Users Deleted");
-//});
+// User.remove({}, function(err) {
+// if (err)
+// throw err;
+// console.log("All Users Deleted");
+// });

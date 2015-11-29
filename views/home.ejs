@@ -11,6 +11,8 @@
 <link rel="stylesheet" href="custom.css">
 <link rel="stylesheet"
 	href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 <header>
 	<nav class="navbar navbar-inverse navbar-static-top">
@@ -44,7 +46,7 @@
 	</nav>
 </header>
 <body>
-	<div id="cool"></div>
+	<div id="cool"><%=name%></div>
 	<form action="/search" method="post">
 		<div class="form-group">
 			<label>Search</label> <input type="text" class="form-control"
@@ -63,9 +65,11 @@
 		// 			$("#cool").append(container);
 
 		//});
-
-		$.getJSON("/test", function(data) {
+		var userName = $('#cool').text();
+		var user;
+		$.get("/getLoggedUser/" + user, function(data) {
 			console.log(data);
+			user = data;
 		});
 	</script>
 </body>
