@@ -23,6 +23,7 @@
     "express-session": "latest",
     "morgan": "latest",
     "cookie-parser": "latest",
-    "connect-flash" : "latest"
+    "connect-flash" : "latest",
+    "async"			: "latest"
   }
 }
