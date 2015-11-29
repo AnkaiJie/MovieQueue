@@ -73,8 +73,6 @@ module.exports = function(app, passport, User) {
 
 						request('https://api.themoviedb.org/3/movie/' + results.id + '/images?api_key=deca429e8664eb1b24c07c143d64068b', function(error2, response2, body2) {
 							var imgRes = JSON.parse(body2);
-							console.log(imgRes.posters[0].file_path);
-							console.log(imgRes.posters[0].width);
 							for (var i = 0; i < imgRes.posters.length; i++) {
 
 								if (imgRes.posters[i].width == 1000) {
@@ -82,24 +80,23 @@ module.exports = function(app, passport, User) {
 										url : imgRes.posters[i].file_path,
 										width : imgRes.posters[i].width
 									}
-									console.log(finalImg);
 									break;
 								}
 							}
 							console.log(finalImg);
+							var movieInfo = {
+								id : results.id,
+								title : results.title,
+								date : results.release_date,
+								rating : results.vote_average,
+								desc : results.overview,
+								image : finalImg
+							}
+							user.movies.push(movieInfo);
+							user.save();
+							res.json(user.movies);
 						});
-						console.log(finalImg);
-						var movieInfo = {
-							id : results.id,
-							title : results.title,
-							date : results.release_date,
-							rating : results.vote_average,
-							desc : results.overview,
-							image : finalImg
-						}
-						user.movies.push(movieInfo);
-						user.save();
-						res.json(user.movies);
+
 					}
 				});
 			}
