@@ -21,8 +21,10 @@ module.exports = function(app, passport, User) {
 					console.log(user.facebook.friends.data);
 					user.save();
 					var name = user.facebook.name;
+					var movies = user.movies;
 					res.render('home.ejs', {
-						name : name
+						name : name,
+						movies: movies
 					});
 				});
 			} else {
@@ -86,10 +88,7 @@ module.exports = function(app, passport, User) {
 		req.logout();
 		res.redirect('/');
 	});
-	
-	app.get('/test', function(req,res){
-		res.json(["a","b"]);
-	});
+
 	
 	function isLoggedIn(req, res, next) {
 		console.log('in isLoggedIn function');

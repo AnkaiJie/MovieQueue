@@ -56,31 +56,60 @@
 	</nav>
 </header>
 <body>
-	<div id="cool"></div>
-     <form action="/search" method="post">
-            <div class="form-group">
-                <label>Search</label> <input type="text" class="form-control" name="searchterm" required>
+	<div id = "user_id" ><%=name%></div>
+    <div class="container">
+        <h1>Movie List</h1>
+        <div id = "Movie List" >
+            <div class="jumbotron">
+                <div class="col-md-3">
+                    <h3 style="font-size: 18px"><=%title%=></h3>
+                    <h3 style="font-size: 18px"><=%date%=></h3>
+                    <h3 style="font-size: 18px"><=%rating%=></h3>
+                </div>
+                <div class="col-md-6">
+                    <h3 style="text-align: left; font-size: 18px"><=%summary%=></h3>
+                </div>
+                <div class="container">
+                    <button type="button" class="btn btn-danger" style="text-align: right">Remove
+                        Movie</button>
+                </div>
             </div>
-            <button type="submit" class="glyphicon glyphicon-search">
-            </button>
-        </form>
+        </div>
+    </div>
+
+    </div>
+    <!--div class="row">
+        <div class="col-md-4">.col-md-1</div>
+            <form action="/search" method="post">
+                <div class="form-group">
+                    <label>Search</label> <input type="text" class="form-control" name="searchterm" required>
+                </div>
+                <button type="submit" class="glyphicon glyphicon-search">
+                </button>
+            </form>
+        </div>
+    </div-->
 	<script>
-// 		var list = [ "movie1", "movie2" ];
+        //alert("here");
+ 		var list = [ "movie1", "movie2" ];
+        //var contentString() = new Array();
+		list.forEach(function(movie) {
+			var container = document.createElement("div");
 
-// 		list.forEach(function(movie) {
-// 			var container = document.createElement("div");
+ 			container.innerHTML = movie;
 
-// 			container.innerHTML = movie;
-
-// 			$("#cool").append(container);
+			$("#cool").append(container);
 		
-		//});
-		
-		$.getJSON("/test", function(data) {
-			console.log(data);
+		});
+        var name = 
+        alert(name);
+		$.getJSON("/getLoggedUser/"+name, function(data) {
+			alert(data);
+
 		});
 	</script>
 </body>
+
 
 <!-- Bootstrap core JavaScript
 >>>>>>> e106c28930f19985663685a44e1190f3522ca12d
