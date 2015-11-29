@@ -140,6 +140,7 @@ module.exports = function(app, passport, User) {
 	}));
 
 	app.post('/search', function(req, res) {
+        console.log("Fuck");
 		var name = req.body.name;
 		User.findOne({
 			'facebook.name' : name

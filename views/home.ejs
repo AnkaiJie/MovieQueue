@@ -1,27 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<title>Home | MovieQueue</title>
-<link rel="stylesheet"
-	href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="custom.css">
-<link rel="stylesheet"
-	href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Home | MovieQueue</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="custom.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
-
-<header> </header>
-
+    
 <body>
-	<nav class="navbar navbar-inverse navbar-static-top">
+    <nav class="navbar navbar-inverse navbar-static-top">
 		<div class="container">
 			<div class="navbar-header" style="padding-top: 5px">
-				<a href="index.ejs"> <img src="logo.png"
+				<a href="/home"> <img src="logo.png"
 					style="width: 180px; height: 60px; border: 0">
 				</a>
 			</div>
@@ -40,13 +35,14 @@
 			</div>
 			<div class="container">
 				<ul class="nav navbar-nav navbar-right" style="padding-top: 7px">
-					<li><a href="/#">Home</a></li>
-					<li><a href="/#">About</a></li>
-					<li><a href="/#">Log out</a></li>
+					<li><a href="/home">Home</a></li>
+					<li><a href="/">About</a></li>
+					<li><a href="/logout">Log out</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
+
 	<div class="container">
 		<div id="username" style="visibility: hidden;"><%=name%></div>
 		<div class="container" id="movie-feed"></div>
@@ -61,32 +57,27 @@
 	</div>
 </body>
 
-<script>
-	var userName = $('#username').text();
-	var user;
-
-	var initPane = function() {
-		console.log("sdjf");
-		$("#movie-feed").after("<h1 id='movie-label' style='text-align: center;'>Your Movie List</h1>");
-		if (user.movies.length == 0)
-			$("#movie-label").after("<h1> YOU DON'T HAVE ANY MOVIES. ADD ONE BELOW OR SEARCH YOUR FRIENDS </h1>");
-		else {
-			for (var i = 0; i < 4; i++) {
-				$("#movie-label").after(
-						"<div class='jumbotron' style='margin-left: 100px; margin-right:100px;' id='" + user.movies[i].id + "'><div class='col-md-3'> <h2>" + user.movies[i].title + "</h2>	<h3 style='font-size: 18px'>Released: " + user.movies[i].date + "</h3><h3 style='font-size: 18px'> Rating: "
-								+ user.movies[i].rating + "</h3> </div><div class='col-md-6'><h3 style='text-align: left; font-size: 18px'>" + user.movies[i].desc + "</h3> </div> <div class='container'><button type='button' class='btn btn-danger' style='float: right;'>Remove Movie</button><\div>");
-			}
-		}
-	}
-	$.get("/getLoggedUser/" + userName, function(data) {
-		console.log("asdfasdfasfasdfasdfasdfasdf");
-		user = data;
-		initPane();
-	});
-
-	$(document).ready(function() {
-
-	});
+<script>    
+    var userName = $('#username').text();
+    var user;
+    
+    var initPane = function() {
+        console.log("sdjf");
+        $("#movie-feed").after("<h1 id='movie-label' style='text-align: center;'>Your Movie List</h1>");
+        if (user.movies.length == 0)
+            $("#movie-label").after("<h1 style='text-align: center;'> YOU DON'T HAVE ANY MOVIES. LOOK FOR ONE BELOW OR SEARCH YOUR FRIENDS </h1>");
+        else{
+            for (var i=0; i<user.movies.length; i++){
+                $("#movie-label").after("<div class='jumbotron' style='margin-left: 375px; margin-right:350px;' id='" + user.movies[i].id + "'><div class='col-md-3'> <h2>" + user.movies[i].title + "</h2>	<h3 style='font-size: 18px'>Released: " + user.movies[i].date + "</h3><h3 style='font-size: 18px'> Rating: " + user.movies[i].rating + "</h3> </div><div class='col-md-6'><h3 style='text-align: left; font-size: 18px'>" + user.movies[i].desc + "</h3> </div> <div class='container'><button type='button' class='btn btn-danger' style='float: right;'>Remove Movie</button></div>");
+            }
+        }
+    }
+    
+    $.get("/getLoggedUser/" + userName, function(data) {
+                user = data;
+                initPane();
+    });
+    
 </script>
 
 <!-- Bootstrap core JavaScript
