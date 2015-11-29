@@ -78,13 +78,14 @@
         </div>
     </div-->
 	<div id="cool"></div>
-	<form action="/search" method="post">
+	<div class="col-md-4">
 		<div class="form-group">
 			<label>Search</label> <input type="text" class="form-control"
 				name="searchterm" required></label>
 		</div>
-		<button type="submit" class="glyphicon glyphicon-search"></button>
-	</form>
+    </div>
+		<button tclass="glyphicon glyphicon-search"></button>
+
 	<script>
 		// 		var list = [ "movie1", "movie2" ];
 
@@ -97,7 +98,7 @@
 
 		//});
         //alert("here");
-        var list = [ "movie1", "movie2" ];
+        /*var list = [ "movie1", "movie2" ];
         //var contentString() = new Array();
         list.forEach(function(movie) {
             var container = document.createElement("div");
@@ -108,13 +109,18 @@
         
         });
         var name = safg;
-        alert(name);
-        $.getJSON("/getLoggedUser/"+ name, function(data) {
-            alert(data);
-        });
-		$.getJSON("/test", function(data) {
-			console.log(data);
-		});
+        var data = new FormData();
+data.append('name', 'Bob'); */
+
+$(document).ready(function(){   
+    $.ajax({
+        url: "/getAllUsers",
+        dataType: "json"
+    }).success(function(data){
+        console.log(data);
+        $('#cool').append(JSON.stringify(data));
+    });
+});
 	</script>
 </body>
 <script

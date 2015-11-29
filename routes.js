@@ -23,12 +23,8 @@ module.exports = function(app, passport, User) {
 					user.facebook.friends = JSON.parse(data);
 					user.save();
 					var name = user.facebook.name;
-					var movies = user.movies;
-					res.render('home.ejs', {
-						name : name,
 					var id = user._id;
 					var movies = user.movies;
-					)};
 					console.log(id);
 					console.log(user);
 					res.render('home.ejs', {
@@ -56,7 +52,7 @@ module.exports = function(app, passport, User) {
 		// });
 		User.find({}, function(err, doc) {
 			console.log(doc);
-			res.json(doc);
+			res.send(doc);
 		});
 	});
 
@@ -105,7 +101,7 @@ module.exports = function(app, passport, User) {
 	app.post('/search', function(req, res) {
 		var name = req.body.name;
 		User.findOne({
-			'facebook.name' : name
+			'facebook.name' : req.user.facebook.name
 		}, function(err, user) {
 			if (err)
 				console.log('error: ' + err);
