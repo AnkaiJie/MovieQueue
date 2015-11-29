@@ -136,6 +136,7 @@ module.exports = function(app, passport, User) {
 	}));
 
 	app.post('/search', function(req, res) {
+        console.log("Fuck");
 		var name = req.body.name;
 		User.findOne({
 			'facebook.name' : name
@@ -148,7 +149,11 @@ module.exports = function(app, passport, User) {
 				// id: user._id,
 				// movies: user.movies
 				// });
-				res.send(user);
+                console.log("Made it here");
+                console.log(name);
+				res.render('friend.ejs', {
+                    name : user.facebook.name
+			    });
 			}
 		});
 	});
